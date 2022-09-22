@@ -14,3 +14,4 @@ def show_katalog(request):
         'nama': 'Laura'
     }
     return render(request, "katalog.html", context)
+
