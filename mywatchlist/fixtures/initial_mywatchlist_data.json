@@ -1,6 +1,6 @@
 [
     {
-        "model": "mywatchlist.filmwatchlist",
+        "model": "mywatchlist.mywatchlist",
         "pk": 1,
         "fields": {
             "watched": "Watched",
@@ -12,7 +12,7 @@
     },
 
     {
-        "model": "mywatchlist.filmwatchlist",
+        "model": "mywatchlist.mywatchlist",
         "pk": 2,
         "fields": {
             "watched": "Not Watched Yet",
@@ -24,7 +24,7 @@
     },
 
     {
-        "model": "mywatchlist.filmwatchlist",
+        "model": "mywatchlist.mywatchlist",
         "pk": 3,
         "fields": {
             "watched":"Watched",
@@ -36,7 +36,7 @@
     },
 
     {
-        "model":"mywatchlist.filmwatchlist",
+        "model":"mywatchlist.mywatchlist",
         "pk":4,
         "fields":{
             "watched":"Watched",
@@ -48,7 +48,7 @@
     },
 
     {
-        "model":"mywatchlist.filmwatchlist",
+        "model":"mywatchlist.mywatchlist",
         "pk":5,
         "fields":{
             "watched":"Not Watched Yet",
@@ -60,7 +60,7 @@
     },
 
     {
-        "model":"mywatchlist.filmwatchlist",
+        "model":"mywatchlist.mywatchlist",
         "pk":6,
         "fields":{
             "watched":"Watched",
@@ -72,7 +72,7 @@
     },
 
     {
-        "model":"mywatchlist.filmwatchlist",
+        "model":"mywatchlist.mywatchlist",
         "pk":7,
         "fields":{
             "watched":"Not Watched Yet",
@@ -84,7 +84,7 @@
     },
 
     {
-        "model":"mywatchlist.filmwatchlist",
+        "model":"mywatchlist.mywatchlist",
         "pk":8,
         "fields":{
             "watched":"Not Watched Yet",
@@ -96,7 +96,7 @@
     },
 
     {
-        "model":"mywatchlist.filmwatchlist",
+        "model":"mywatchlist.mywatchlist",
         "pk":9,
         "fields":{
             "watched":"Watched",
@@ -108,7 +108,7 @@
     },
 
     {
-        "model":"mywatchlist.filmwatchlist",
+        "model":"mywatchlist.mywatchlist",
         "pk":10,
         "fields":{
             "watched":"Watched",
@@ -118,6 +118,5 @@
             "review":"Best friends Becky and Hunter find themselves at the top of a 2,000-foot radio tower."
         }
     }
-
 
 ]
