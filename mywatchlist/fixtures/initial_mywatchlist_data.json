@@ -1,32 +1,32 @@
 [
     {
-        "model":"mywatchlist.filmwatchlist",
-        "pk":1,
-        "fields":{
-            "watched":"Watched",
-            "title":"Mencuri Raden Saleh",
-            "rating":8.2,
-            "release_date":"August 25, 2022",
-            "review":"A group plans to steal a priceless historical painting 'The Arrest of Prince Diponegoro' by Raden Saleh from the Presidential Palace."
+        "model": "mywatchlist.filmwatchlist",
+        "pk": 1,
+        "fields": {
+            "watched": "Watched",
+            "title": "Mencuri Raden Saleh",
+            "rating": 8.2,
+            "release_date": "August 25, 2022",
+            "review": "A group plans to steal a priceless historical painting 'The Arrest of Prince Diponegoro' by Raden Saleh from the Presidential Palace."
         }
     },
 
     {
-        "model":"mywatchlist.filmwatchlist",
-        "pk":2,
-        "fields":{
-            "watched":"Not Watched Yet",
-            "title":"Noktah Merah Perkawinan",
-            "rating":8.8,
-            "release_date":"September 15, 2022",
-            "review":"The relationship between Ambar and Gilang begins to enter a period of disappointment after a big fight due to the interference of both parents in their domestic affair."
+        "model": "mywatchlist.filmwatchlist",
+        "pk": 2,
+        "fields": {
+            "watched": "Not Watched Yet",
+            "title": "Noktah Merah Perkawinan",
+            "rating": 8.8,
+            "release_date": "September 15, 2022",
+            "review": "The relationship between Ambar and Gilang begins to enter a period of disappointment after a big fight due to the interference of both parents in their domestic affair."
         }
     },
 
     {
-        "model":"mywatchlist.filmwatchlist",
-        "pk":3,
-        "fields":{
+        "model": "mywatchlist.filmwatchlist",
+        "pk": 3,
+        "fields": {
             "watched":"Watched",
             "title":"Top Gun: Maverick",
             "rating":8.4,
