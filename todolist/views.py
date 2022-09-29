@@ -1,5 +1,7 @@
 from django.shortcuts import render
 
+from todolist.models import Task
+
 from django.shortcuts import redirect
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -17,8 +19,7 @@ from django.contrib.auth.decorators import login_required
 def show_todolist(request):
     data_todo_user = Task.objects.filter(user=request.user)
     context = {
-        'list_task': data_todo_user
-        'nama': 'Laura',
+        'list_task': data_todo_user,
         'last_login': request.COOKIES['last_login'],
     }
     return render(request, 'todolist.html', context)
@@ -58,7 +59,7 @@ def login_user(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            response = HttpResponseRedirect(reverse("wishlist:show_wishlist")) # membuat response
+            response = HttpResponseRedirect(reverse("todolist:show_todolist")) # membuat response
             response.set_cookie('last_login', str(datetime.datetime.now())) # membuat cookie last_login dan menambahkannya ke dalam response
             return response
         else:
@@ -68,7 +69,7 @@ def login_user(request):
 
 def logout_user(request):
     logout(request)
-    response = HttpResponseRedirect(reverse('wishlist:login'))
+    response = HttpResponseRedirect(reverse('todolist:login'))
     response.delete_cookie('last_login')
     return response
 
