@@ -22,24 +22,20 @@ def show_todolist(request):
     data_todo_user = Task.objects.filter(user=request.user)
     context = {
         'list_task': data_todo_user,
-        'last_login': request.COOKIES['last_login'],
     }
     return render(request, 'todolist.html', context)
 
 @login_required(login_url='/todolist/login/')
 def create_task(request):
-    form = TaskForm()
-    
-    if request.method == "POST":
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            title = form.cleaned_data["title"]
-            description = form.cleaned_data["description"]
-            user = request.user
-            task = Task(title=title, description = description, user=user)
-            task.save()
+    form = TaskForm(request.POST)
+    if form.is_valid():
+        title = form.cleaned_data["title"]
+        description = form.cleaned_data["description"]
+        user = request.user
+        task = Task(title=title, description = description, user=user)
+        task.save()
 
-            return redirect("todolist:show_todolist")
+        return redirect("todolist:show_todolist")
 
 
     context = {'form':form}
