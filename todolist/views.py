@@ -33,13 +33,14 @@ def create_task(request):
     if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
-            task = form.save(commit = False)
-            task.user = request.user
+            title = form.cleaned_data["title"]
+            description = form.cleaned_data["description"]
+            user = request.user
+            task = Task(title=title, description = description, user=user)
             task.save()
-            form.save_m2m()
 
-            return redirect('todolist:showtodolist')
-            
+            return redirect("todolist:show_todolist")
+
 
     context = {'form':form}
     return render(request, "create_task.html", context)
