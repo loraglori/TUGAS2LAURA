@@ -22,13 +22,13 @@
             </th>
             <th>
                 <button><a href="{url 'todolist:delete' todo.id %}" title="">delete</a></button>
-                <button><a href="{url 'todolist:delete' todo.id %}" title="">change</a></button>
+                <button><a href="{url 'todolist:change' todo.id %}" title="">change</a></button>
             </th>
         </tr>
     {% endfor %}
 </table>
 <br>
-<button><a href="{url 'todolist:create_task' %}" title="">create new task</a></button>
+<button><a href="{% url 'todolist:create_task' %}">Create new task</a></button>
 <button><a href="{% url 'todolist:logout' %}">Logout</a></button>
 <br>
 

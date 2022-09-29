@@ -15,6 +15,8 @@ from django.urls import reverse
 
 from django.contrib.auth.decorators import login_required
 
+from todolist.forms import TaskForm
+
 @login_required(login_url='/todolist/login/')
 def show_todolist(request):
     data_todo_user = Task.objects.filter(user=request.user)
@@ -26,14 +28,18 @@ def show_todolist(request):
 
 @login_required(login_url='/todolist/login/')
 def create_task(request):
+    form = TaskForm()
+    
     if request.method == "POST":
         form = TaskForm(request.POST)
         if form.is_valid():
-            title = request.POST.get('title')
-            description = request.POST.get('description')
-            form.save()
+            task = form.save(commit = False)
+            task.user = request.user
+            task.save()
+            form.save_m2m()
 
-            return HttpResponseRedirect(reverse('todolist:show_todolist'))
+            return redirect('todolist:showtodolist')
+            
 
     context = {'form':form}
     return render(request, "create_task.html", context)
@@ -83,4 +89,4 @@ def change(request,pk):
     status = Task.objects.get(id=pk)
     status.is_finished = not(status.is_finished)
     status.save()
-    return redierct('todolist:show_todolist')
+    return redirect('todolist:show_todolist')
