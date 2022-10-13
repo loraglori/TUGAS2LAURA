@@ -1,35 +1,130 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>user {{request.user.username.title}} To Do List</h1> 
-<br>
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Title</th>
-        <th>Description</th>
-    </tr>
-    {% comment %} Tambahkan data di bawah baris ini {% endcomment %}
-    {% for task in list_task %}
-        <tr>
-            <th>{{todo.date}}</th>
-            <th>{{todo.title}}</th>
-            <th>{{todo.description}}</th>
-            <th>
-                {% if todo.is_finished %} Finished 
-                {% else %} Not Yet
-                {% endif %}
-            </th>
-            <th>
-                <button><a href="{url 'todolist:delete' todo.id %}" title="">delete</a></button>
-                <button><a href="{url 'todolist:change' todo.id %}" title="">change</a></button>
-            </th>
-        </tr>
-    {% endfor %}
-</table>
-<br>
-<button><a href="{% url 'todolist:create_task' %}">Create new task</a></button>
-<button><a href="{% url 'todolist:logout' %}">Logout</a></button>
-<br>
+
+<script>
+
+  const makeCard = (task) =>
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card" style="width:18rem;">
+      <div class="card-body">
+        <h5 class="card-title">${task.title}</h5>
+        <p>${task.description}</p>
+        <p class="text-xs font-semibold">${task.date}</p>
+      </div>
+      <div class="flex flex-col gap-2">
+        ${task.is_finished ? 
+          `<p class="text-sm font-bold text-green-apple">Finished</p>` : 
+          `<p class="text-sm font-bold text-orange-red">Not Finished</p>`}
+      </div>
+    </div>
+  </div>
+  </div>
+
+  const showTask = () => {
+    $.get("/todolist/json/", (data) =>{
+      for(var i=0;i<data.length;i++){
+        var task = {
+          pk:data[i].pk,
+          ...data[i].fields
+        };
+        $("#task-cards").append(makeCard(task));
+      }
+    }
+    )
+  }
+
+
+</script>
+
+<nav class="navbar navbar-light bg-light navbar-expa'nd-lg ">
+    <a href="#" class="navbar-brand">ToDoList</a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="navbar-item">
+                <a href="{%url 'todolist:show_todolist' %}" class="nav-link">Home</a>
+            </li>
+            <li class="navbar-item">
+                <a href="{%url 'todolist:create_task' %}" class="nav-link">Buat Task</a>
+            </li>
+            <li class="navbar-item">
+              <a href="{%url 'todolist:login' %}" class="nav-link">Log Out</a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+          <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  
+
+
+<header><h1>user {{request.user.username.title}} To Do List</h1></header> 
+
+<div class="bg-ivory rounded-lg p-4 shadow-md hover:shadow-xl hover:shadow-gray-400" id="task-{{ id }}">
+    <div class="flex flex-col">
+      <div class="flex justify-between gap-8">
+        <div class="flex flex-col justify-center">
+          <p class="text-lg font-semibold">{{ todo.title }}</p>
+        </div>
+        <div class="flex flex-col justify-center">
+          <p class="text-xs font-semibold">{{ todo.date }}</p>
+        </div>
+      </div>
+      
+      <div class="border-b-2 border-robin-egg-blue my-2"></div>
+  
+      
+    
+        <p>{{ task.description }}</p>
+    
+        
+      </div>
+    </div>
+  </div>
+
+  <button class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Task</button>
+        
+  <div class="modal fade" id="myModal">
+      <div class="modal-dialog">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title">Add Task</h5>
+                  <button type="button" class="close" data-dismiss="modal">
+                      <span>&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                <form method="POST">
+                  {% csrf_token %}
+                  <table>
+                      <tr>
+                          <td class="fw-bold mb-2 text-uppercase">Title: </td>
+                          <td><input type="text" name="Title" placeholder="your new task" class="form-control"></td>
+                      </tr>   
+                      <tr>
+                          <td class="fw-bold mb-2 text-uppercase">Deskripsi: </td>
+                          <td><input type="text" name="Description" placeholder="Description" class="form-control"></td>
+                      </tr>
+                  </table>
+                  <br>
+                  <td><input type="submit" name="submit" value="Add"/></td>
+              </form>
+              </div>
+              <div class="modal-footer">
+                  <button id="submit-task" name="submit" class="btn btn-primary btn btn-outline-light btn-lg px-5" data-dismiss="modal">Cancel</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <div class="flex flex-col p-8 pt-28">
+    <div class="flex flex-wrap justify-center gap-8" id="task-cards">
+    </div>
+  </div>
 
 {% endblock content %}

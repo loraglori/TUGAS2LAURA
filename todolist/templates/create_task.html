@@ -1,37 +1,78 @@
 {% extends 'base.html' %}
 
 {% block meta %}
-<h1>Create new TODO</h1>
+
+<nav class="navbar navbar-light bg-light navbar-expand-lg ">
+    <a href="#" class="navbar-brand">ToDoList</a>
+    <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ml-auto">
+            <li class="navbar-item">
+                <a href="{%url 'todolist:show_todolist' %}" class="nav-link">Home</a>
+            </li>
+            <li class="navbar-item">
+                <a href="{%url 'todolist:create_task' %}" class="nav-link">Buat Task</a>
+            </li>
+            <li class="navbar-item">
+              <a href="{%url 'todolist:login' %}" class="nav-link">Log Out</a>
+          </li>
+        </ul>
+    </div>
+  </nav>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+<header>
+    <h1>Create new TODO</h1>
+</header>
 {% endblock meta %}
 
 {% block content %}
 
 <div class = "create_task">
 
-    <form method="POST">
-        {% csrf_token %}
-        <table>
-            <tr>
-                <td>Title: </td>
-                <td><input type="text" name="Title" placeholder="your new task" class="form-control"></td>
-            </tr>   
-            <tr>
-                <td>Deskripsi: </td>
-                <td><input type="text" name="Description" placeholder="Description" class="form-control"></td>
-            </tr>
-        </table>
-        <button class="submit mt-6 px-4 py-2">
-            Add
-        </button>
-    </form>
-    
-    {% if messages %}
+    <main>
+
+        <section class="vh-100 gradient-custom">
+            <div class="container py-5 h-100">
+              <div class="row d-flex justify-content-center align-items-center h-100">
+                  <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                    <div class="card-body p-5 text-center">
+          
+                      <div class="mb-md-5 mt-md-4 pb-5">
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td class="fw-bold mb-2 text-uppercase">Title: </td>
+                    <td><input type="text" name="Title" placeholder="your new task" class="form-control"></td>
+                </tr>   
+                <tr>
+                    <td class="fw-bold mb-2 text-uppercase">Deskripsi: </td>
+                    <td><input type="text" name="Description" placeholder="Description" class="form-control"></td>
+                </tr>
+            </table>
+            <br>
+            <td><input type="submit" name="submit" value="Add"/></td>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+</section>
+        
+        {% if messages %}
         <ul class = "messages">
             {% for message in messages %}
-                <li>{{ message }}</li>
-                {% endfor %}
+            <li>{{ message }}</li>
+            {% endfor %}
         </ul>
-    {% endif %}
+        {% endif %}
+    </main>
 </div>
 
 {% endblock content %}
